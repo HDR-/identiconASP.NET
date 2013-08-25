@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Identicon";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            @if(Request.IsAuthenticated)
+            {
+                var identiconURL = "http://54.213.104.16:8080/heng_identicon/MyIdenticonServlet?c=" + @User.Identity.Name + "&s=16";
+                <hgroup class="title">
+                <h1>Hello,@User.Identity.Name</h1>
+                <h2>This is your identicon image:</h2>
+                <img src=@identiconURL alt="identicon" width="128" />
+                </hgroup>
+                
+                
+            }
+            else
+            {
+                <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+                <h2>@ViewBag.Message</h2>
+                </hgroup>
+            }
+            
+            <p>
+                Submit your username to see how will your identicon looks like
+            </p>
+            <form name="checkIdenticon" method="POST">
+                    <input type="text" name="c"/>
+                    <input type="hidden" name="s" value="64"/>
+                    <input class="sendButton" type="submit" value="submit"/>
+            </form>
+        </div>
+    </section>
+}
+
+<div class="operatingArea">
+            <div class="output">
+                <p class="explainText">Don's Park's identicon of int input:@ViewBag.code</p>
+                <img src=@ViewBag.imageURL1 alt="identicon image" width="128"/>
+            </div>
+            <div class="output">
+                <p class="explainText">My identicon of text input:@ViewBag.code</p>
+                <img src=@ViewBag.imageURL2 alt="identicon image" width="128"/>
+            </div>
+</div>
+<div class="intro">
+<ol class="round">
+    <li class="one">
+        <h2>What is identicon?</h2>
+        <p>An Identicon is a visual representation of a hash value, usually of an IP address, that serves to identify a user of a computer system as a form of avatar while protecting the users' privacy. The original Identicon was a 9-block graphic, and the representation has been extended to other graphic forms by third parties.</p><p>*Both image and introduction are from <a href="http://en.wikipedia.org/wiki/Identicon">Wikipedia</a>.</p>
+    </li>
+
+    <li class="two">
+        <h2>What's the difference?</h2>
+        <p>Park's identicon generator can only process int value. My identicon generator is using MD5 of any text input as code to generate images so it can process text input. It's a prototype with promising potential improvements and huge possibilities.</p>
+    </li>
+
+    <li class="three">
+        <h2>How to use this web application?</h2>
+        <p>Simply put text into the input box and hit the button, you will see the identicon images showing on screen. You can register and have your own identicon image.</p>
+    </li>
+</ol>
+</div>
+
